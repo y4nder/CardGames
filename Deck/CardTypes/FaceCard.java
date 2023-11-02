@@ -1,4 +1,4 @@
-package Deck;
+package Deck.CardTypes;
 
 import Deck.CardAttribute.*;
 
