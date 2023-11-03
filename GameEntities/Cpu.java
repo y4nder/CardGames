@@ -10,9 +10,9 @@ public class Cpu extends Player{
     }
 
     @Override
-    public Card chooseCard() {
+    public Card chooseCard(Card fromTable) {
         for(Card myCard : playerCards){
-            if(pAction.getCardValidator().isValid(myCard, myCard)){
+            if(pAction.getCardValidator().isValid(myCard, fromTable)){
                 return myCard;
             }
         }

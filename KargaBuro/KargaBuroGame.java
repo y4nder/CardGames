@@ -13,6 +13,7 @@ public class KargaBuroGame extends GameSetup {
         cardDeck = new Deck();
         tableDeck = new Table();
         startingPlayer =  playerRotationAndCardSetup(STARTING_CARDS, allPlayers, Rotations.RIGHT_ROTATION);
+        rotator = new RightRotator();   
     }
 
     public void KargaBuroSetup(){
@@ -21,21 +22,35 @@ public class KargaBuroGame extends GameSetup {
         playKargaBuro(startingPlayer, currentCard);
     }
 
-    public void playKargaBuro(Player currentPlayer, Card currentCard){
-        System.out.println("top card is " + tableDeck.topCard().toString());
-        Card toThrow = currentPlayer.getPlayerAction().throwCard(currentPlayer, currentCard);
-        if(toThrow != null){
-
-        }
-        else{
-
+    public void playKargaBuro(Player startingPlayer, Card startingCard){
+        Player currentPlayer = startingPlayer;
+        Card currentCard = startingCard;
+        boolean gameFinished = false;
+        while(!gameFinished){
+            System.out.println("\n---------------------------------------");
+            System.out.println(currentPlayer.getName() + "'s turn");
+            System.out.println("top card is " + tableDeck.topCard().toString());
+            Card toThrow = currentPlayer.getPlayerAction().throwCard(currentPlayer, currentCard);
+            if(toThrow != null){
+                if(currentPlayer.hasNoCardsLeft()){
+                    System.out.println(currentPlayer.getName() + " won!");
+                    gameFinished = true;
+                }
+                currentCard = toThrow;
+                tableDeck.addToTableDeck(currentCard);
+                currentPlayer = rotator.rotate(currentPlayer);
+            }
+            else{
+                System.out.println(currentPlayer.getName() + " will draw one");
+                currentPlayer.receiveCards(currentPlayer.getPlayerAction().drawCard(1, cardDeck));
+            }
         }
     }
     
     public static void main(String[] args) {
         Player p1 = new User("p1", new KargaBuroActions());
         Player p2 = new User("p2", new KargaBuroActions());
-        Player p3 = new User("p3", new KargaBuroActions());
+        Player p3 = new Cpu("p3", new KargaBuroActions());
 
         KargaBuroGame k = new KargaBuroGame(List.of(p1, p2, p3));
         

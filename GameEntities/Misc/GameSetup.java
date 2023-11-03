@@ -9,6 +9,7 @@ public abstract class GameSetup {
     protected Deck cardDeck;
     protected Table tableDeck;
     protected Player startingPlayer;
+    protected Rotator rotator;
 
     protected Player playerRotationAndCardSetup(int startingCards, List<Player> allPlayers, Rotations rotation){
         cardDeck.shuffle();

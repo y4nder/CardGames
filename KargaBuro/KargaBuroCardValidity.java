@@ -5,6 +5,9 @@ import GameEntities.Misc.CardValidator;
 
 public class KargaBuroCardValidity extends CardValidator{
     public boolean isValid(Card myCard, Card fromTable){
-        return myCard.getSuit() == fromTable.getSuit();
+        if(myCard.getSuit() == fromTable.getSuit()){
+            return true;
+        }
+        return false;
     }
 }

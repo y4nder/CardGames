@@ -74,7 +74,7 @@ public abstract class Player {
         }
     }
     
-    public abstract Card chooseCard();
+    public abstract Card chooseCard(Card fromTable);
 
     protected boolean validChoice(int choice){
         if(choice >= 0 && choice < playerCards.size()){
@@ -84,4 +84,7 @@ public abstract class Player {
         return false;
     }
     
+    public boolean hasNoCardsLeft(){
+        return playerCards.size() == 0;
+    }
 }

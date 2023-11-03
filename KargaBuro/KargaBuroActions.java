@@ -9,10 +9,8 @@ public class KargaBuroActions extends PlayerAction{
     
     @Override
     public Card throwCard(Player currentPlayer, Card fromTable) {
-        Card chosenCard = null;
-        do{
-            chosenCard = currentPlayer.chooseCard();
-        }while(!cValidity.isValid(chosenCard, fromTable));
+        Card chosenCard = currentPlayer.chooseCard(fromTable);
+        if(chosenCard == null) return null;
         return chosenCard;
     }
 
@@ -20,6 +18,6 @@ public class KargaBuroActions extends PlayerAction{
         return cValidity;
     }
 
-    
+
     
 }
