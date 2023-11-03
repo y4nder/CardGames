@@ -1,6 +1,6 @@
 package Deck.CardAttribute;
 
-public enum Suit {
+public enum Suits {
     HEART,
     DIAMOND,
     SPADE,
