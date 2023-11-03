@@ -15,5 +15,11 @@ public class KargaBuroActions extends PlayerAction{
         }while(!cValidity.isValid(chosenCard, fromTable));
         return chosenCard;
     }
+
+    public KargaBuroCardValidity getCardValidator(){
+        return cValidity;
+    }
+
+    
     
 }

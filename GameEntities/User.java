@@ -1,5 +1,7 @@
 package GameEntities;
 
+import java.util.Scanner;
+
 import Deck.Card;
 import GameEntities.Misc.PlayerAction;
 
@@ -11,8 +13,16 @@ public class User extends Player{
 
     @Override
     public Card chooseCard() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'chooseCard'");
+        Scanner scan = new Scanner(System.in);
+        int index;
+        do{
+            showCards();
+            System.out.print("Choose card: ");
+            index = scan.nextInt();
+            index--;
+            if(index == -1) return null;
+        }while(!validChoice(index));
+        Card chosenCard = playerCards.get(index);
+        return chosenCard;
     }
-    
 }

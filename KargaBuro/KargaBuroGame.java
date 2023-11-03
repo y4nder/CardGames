@@ -16,14 +16,16 @@ public class KargaBuroGame extends GameSetup {
     }
 
     public void KargaBuroSetup(){
-        Card currentCard = tableDeck.topCard();
+        Card currentCard = cardDeck.drawOne();
+        tableDeck.addToTableDeck(currentCard);
         playKargaBuro(startingPlayer, currentCard);
     }
 
     public void playKargaBuro(Player currentPlayer, Card currentCard){
+        System.out.println("top card is " + tableDeck.topCard().toString());
         Card toThrow = currentPlayer.getPlayerAction().throwCard(currentPlayer, currentCard);
         if(toThrow != null){
-            
+
         }
         else{
 
@@ -31,12 +33,13 @@ public class KargaBuroGame extends GameSetup {
     }
     
     public static void main(String[] args) {
-        Player p1 = new Cpu("p1", null);
-        Player p2 = new User("p2", null);
-        Player p3 = new User("p3", null);
+        Player p1 = new User("p1", new KargaBuroActions());
+        Player p2 = new User("p2", new KargaBuroActions());
+        Player p3 = new User("p3", new KargaBuroActions());
 
         KargaBuroGame k = new KargaBuroGame(List.of(p1, p2, p3));
-        k.showAllPlayerCards();
+        
+        k.KargaBuroSetup();
     }
 
 }

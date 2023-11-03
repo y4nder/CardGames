@@ -1,25 +1,27 @@
 package GameEntities;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.ArrayList;
 import java.util.List;
 
 import Deck.Card;
+import GameEntities.Misc.CardValidator;
 import GameEntities.Misc.PlayerAction;
 
 public abstract class Player {
-    private String name;
-    private Deque<Card> playerCards;
-    private Player playerLeft;
-    private Player playerRight;
-    private PlayerAction pAction;
+    protected String name;
+    protected List<Card> playerCards;
+    protected Player playerLeft;
+    protected Player playerRight;
+    protected PlayerAction pAction;
+    protected CardValidator cValidator;
     
     public Player(String name, PlayerAction pAction){
         this.name = name;
-        this.playerCards = new ArrayDeque<>();
+        this.playerCards = new ArrayList<>();
         this.playerLeft = null;
         this.playerRight = null;
         this.pAction = pAction;
+        this.cValidator = this.pAction.getCardValidator();
     }
 
     public Player getPlayerLeft() {
@@ -32,7 +34,7 @@ public abstract class Player {
     public String getName() {
         return name;
     }
-    public Deque<Card> getPlayerCards() {
+    public List<Card> getPlayerCards() {
         return playerCards;
     }
 
@@ -44,7 +46,7 @@ public abstract class Player {
     public void setName(String name) {
         this.name = name;
     }
-    public void setPlayerCards(Deque<Card> playerCards) {
+    public void setPlayerCards(List<Card> playerCards) {
         this.playerCards = playerCards;
     }
     public void setPlayerAction(PlayerAction pAction){
@@ -65,12 +67,21 @@ public abstract class Player {
     }
 
     public void showCards() {
+        int i = 0;
         System.out.println(name + " cards");
         for(Card cards : playerCards){
-            System.out.println(cards.toString());
+            System.out.println("[" + (++i) + "]" + cards.toString());
         }
     }
     
     public abstract Card chooseCard();
 
+    protected boolean validChoice(int choice){
+        if(choice >= 0 && choice < playerCards.size()){
+            return true;
+        }
+        System.out.println("Invalid choice");            
+        return false;
+    }
+    
 }

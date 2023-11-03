@@ -11,8 +11,12 @@ public class Cpu extends Player{
 
     @Override
     public Card chooseCard() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'chooseCard'");
+        for(Card myCard : playerCards){
+            if(pAction.getCardValidator().isValid(myCard, myCard)){
+                return myCard;
+            }
+        }
+        return null;
     }
     
 }

@@ -45,6 +45,10 @@ public class Deck {
         return drawnCards;
     }
 
+    public Card drawOne(){
+        return cardDeck.pollLast();
+    }
+
     public boolean cardDeckIsEmpty(){
         return cardDeck.size() == 0;
     }

@@ -6,6 +6,7 @@ import java.util.List;
 import Deck.Card;
 import Deck.Deck;
 import GameEntities.Player;
+import KargaBuro.KargaBuroCardValidity;
 
 public abstract class PlayerAction {
     public List<Card> drawCard(int howMany, Deck deck){
@@ -15,4 +16,6 @@ public abstract class PlayerAction {
     }
 
     public abstract Card throwCard(Player currentPlayer, Card fromTable);
+
+    public abstract KargaBuroCardValidity getCardValidator();
 }
